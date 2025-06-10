@@ -52,7 +52,7 @@ export default function Testimonials() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.5 }}
-            className="bg-gray-50 dark-gray p-8 rounded-lg shadow-md max-w-xl mx-auto"
+            className="bg-gray-50 dark-gray p-8 rounded-lg shadow-lg max-w-xl mx-auto"
           >
             <p className="text-gray-700 italic mb-6">“{testimonials[selected].text}”</p>
             <div className="flex items-center justify-center gap-4">
@@ -76,7 +76,7 @@ export default function Testimonials() {
               key={i}
               onClick={() => setSelected(i)}
               className={`w-4 h-4 rounded-full transition-colors ${
-                selected === i ? 'bg-blue-600' : 'bg-gray-300'
+                selected === i ? 'bg-blue-800' : 'bg-gray-300'
               }`}
               aria-label={`Voir témoignage de ${testimonials[i].name}`}
             />

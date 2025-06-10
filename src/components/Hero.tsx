@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
@@ -11,10 +11,13 @@ export default function Hero() {
           className="text-center md:text-left max-w-xl"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-gray-300 mb-6 leading-tight">
-            Deviens <span className="text-blue-600 dark:text-blue-400">Freelance</span> sans galérer
+            Deviens{' '}
+            <span className="text-blue-600 dark:text-blue-400">Freelance</span>{' '}
+            sans galérer
           </h1>
           <p className="text-gray-600 dark:text-white text-lg mb-8">
-            Télécharge notre eBook gratuit et découvre les étapes concrètes pour te lancer en freelance tech.
+            Télécharge notre eBook gratuit et découvre les étapes concrètes pour
+            te lancer en freelance tech.
           </p>
           <a
             href="#contact"
@@ -25,14 +28,14 @@ export default function Hero() {
         </motion.div>
 
         <motion.img
-          src="/src/assets/ebook-image.png"
+          src="/public/assets/ebook-image.webp"
           alt="Couverture eBook"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="w-full max-w-sm md:max-w-md"
+          className="w-full max-w-sm md:max-w-md rounded-lg shadow-lg object-cover"
         />
       </div>
     </section>
-  )
+  );
 }

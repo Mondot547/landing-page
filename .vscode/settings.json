@@ -1,0 +1,52 @@
+{
+  // Formatage automatique
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+
+  // Préférer Prettier
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // ESLint
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
+  // Python
+  "python.formatting.provider": "black",
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.mypyEnabled": true,
+
+  // PHP
+  "php.validate.executablePath": "/usr/bin/php", // à adapter selon ton OS
+  "intelephense.environment.phpVersion": "8.1", // Ajuste selon la version que tu utilises
+
+  // Terminal intégré
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.defaultProfile.linux": "bash",
+
+  // SQLTools
+  "sqltools.connections": [
+    {
+      "name": "MyDB",
+      "driver": "MySQL",
+      "server": "localhost",
+      "database": "mydb",
+      "username": "root",
+      "password": "root"
+    }
+  ],
+
+  // IntelliSense amélioré
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": false,
+    "strings": true
+  }
+}
