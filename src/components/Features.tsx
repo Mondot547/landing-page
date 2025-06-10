@@ -62,11 +62,11 @@ export default function Features() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full border border-blue-200/50 dark:border-blue-500/30 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full border border-blue-200/50 dark:border-blue-500/30 mb-5">
             <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <span className="text-sm font-medium text-blue-700 dark:text-blue-300">
+            <span className="text-sm font-medium text-blue-700 dark:text-blue-300 tracking-wide">
               Formation complète
             </span>
           </div>
@@ -80,7 +80,7 @@ export default function Features() {
         </motion.div>
 
         <div
-          className="relative flex justify-center items-center"
+          className="relative flex justify-center items-center flex-wrap gap-8 mt-12"
           style={{ height: '700px' }}
         >
           {features.map((feat, i) => {
@@ -94,10 +94,10 @@ export default function Features() {
                 onHoverEnd={() => setHoveredIndex(null)}
                 initial={{
                   position: 'absolute',
-                  top: offset.y === '-50%' ? '25%' : '75%',
-                  left: offset.x === '-50%' ? '25%' : '75%',
-                  width: '280px',
-                  height: '200px',
+                  top: offset.y === '-70%' ? '-45%' : '55%',
+                  left: offset.x === '-50%' ? '45%' : '55%',
+                  width: '50%',
+                  height: '50%',
                   scale: 0.8,
                   x: '-50%',
                   y: '-50%',
@@ -129,13 +129,13 @@ export default function Features() {
                         transition: { duration: 0.5, ease: 'easeOut' },
                       }
                     : {
-                        top: offset.y === '-50%' ? '25%' : '75%',
+                        top: offset.y === '-50%' ? '20%' : '55%',
                         left: offset.x === '-50%' ? '25%' : '75%',
-                        width: '280px',
-                        height: '200px',
+                        width: '50%',
+                        height: '30%',
                         scale: 0.8,
                         x: '-50%',
-                        y: '-50%',
+                        y: '-15%',
                         zIndex: 1,
                         opacity: 1,
                         transition: {
@@ -144,8 +144,10 @@ export default function Features() {
                         },
                       }
                 }
-                className="group relative cursor-pointer overflow-hidden"
-                style={{ transformOrigin: 'center center' }}
+                className="group relative flex items-center cursor-pointer overflow-hidden"
+                style={{
+                  transformOrigin: 'center center',
+                }}
               >
                 {/* Card background with gradient */}
                 <div
