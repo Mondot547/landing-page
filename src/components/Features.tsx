@@ -109,7 +109,7 @@ export default function Features() {
                     ? {
                         top: '50%',
                         left: '50%',
-                        width: '90%',
+                        width: '65%',
                         height: '80%',
                         scale: 1,
                         x: '-50%',
