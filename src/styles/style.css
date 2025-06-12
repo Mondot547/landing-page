@@ -1,0 +1,42 @@
+/* Ce style permet d’intégrer l’icône + le drapeau dans le champ */
+.phone-input-custom {
+  position: relative;
+}
+
+.phone-input-custom .PhoneInput {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5db;
+  /* gray-300 */
+  border-radius: 0.375rem;
+  padding-left: 3.5rem;
+  /* place pour l’icône */
+  padding-right: 0.75rem;
+  background-color: white;
+}
+
+.phone-input-custom .PhoneInputCountry {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.phone-input-custom .PhoneInputInput {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 0.5rem 0;
+  background: transparent;
+  color: #111827;
+  /* gray-900 */
+}
+
+.dark .phone-input-custom .PhoneInput {
+  background-color: #1f2937;
+  /* gray-800 */
+  border-color: #4b5563;
+  /* gray-600 */
+}
+
+.dark .phone-input-custom .PhoneInputInput {
+  color: white;
+}

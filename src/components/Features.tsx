@@ -129,13 +129,14 @@ export default function Features() {
                         transition: { duration: 0.5, ease: 'easeOut' },
                       }
                     : {
-                        top: offset.y === '-50%' ? '20%' : '55%',
-                        left: offset.x === '-50%' ? '25%' : '75%',
+                        top: offset.y === '-50%' ? '20%' : '50%',
+                        left: offset.x === '-50%' ? '5%' : '50%',
+
                         width: '50%',
                         height: '30%',
                         scale: 0.8,
-                        x: '-50%',
-                        y: '-15%',
+                        x: '-4%',
+                        y: '-0%',
                         zIndex: 1,
                         opacity: 1,
                         transition: {
