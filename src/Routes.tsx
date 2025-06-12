@@ -14,6 +14,7 @@ import { DarkModeProvider } from './context/DarkModeContext';
 
 // 🧩 Icons
 import { FaArrowLeft } from 'react-icons/fa';
+import CookieConsent from './components/cookies/CookiesConsent';
 
 const AppRoutes = () => {
   return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
             <Route path="/terms" element={<Terms />} />
             <Route path="/privacy" element={<Privacy />} />
           </Routes>
+          <CookieConsent />
         </main>
         <Footer />
       </DarkModeProvider>
