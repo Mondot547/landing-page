@@ -245,28 +245,6 @@ export default function Features() {
                       </div>
                     </div>
                   </motion.div>
-
-                  {/* Bottom action hint */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={
-                      isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }
-                    }
-                    transition={{
-                      duration: 0.4,
-                      delay: isHovered ? 0.6 : 0,
-                    }}
-                    className="pt-6 flex items-center justify-between border-t border-gray-200/50 dark:border-gray-600/50"
-                  >
-                    <div className="flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400">
-                      <span>Formation détaillée</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </div>
-                    <div className="text-xs text-gray-500 dark:text-gray-400">
-                      Cliquez pour fermer
-                    </div>
-                  </motion.div>
-
                   {/* Hover glow effect */}
                   <div
                     className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${feat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none`}

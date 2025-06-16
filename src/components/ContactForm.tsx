@@ -161,7 +161,6 @@ export default function ContactForm() {
         {
           autoClose: 5000,
           role: 'status',
-          'aria-live': 'polite' as any,
         },
       );
 
@@ -180,7 +179,15 @@ export default function ContactForm() {
 
       toast.error(errorMessage, {
         role: 'alert',
-        'aria-live': 'assertive' as any,
+        autoClose: 5000,
+        onClose: () => {
+          if (errorMessage.includes('trop long')) {
+            setError('message', {
+              type: 'manual',
+              message: errorMessage,
+            });
+          }
+        },
       });
     } finally {
       setIsSubmitting(false);

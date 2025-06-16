@@ -20,10 +20,7 @@ const AppRoutes = () => {
   return (
     <Router>
       <DarkModeProvider>
-        <header className="p-4 flex justify-between items-center bg-white dark:bg-gray-900 dark:text-gray-100 shadow-md">
-          <Link to="/" className="justify-start flex items-center">
-            <FaArrowLeft className="w-8 h-8 text-blue-800 dark:text-gray-100" />
-          </Link>
+        <header className="p-4 flex justify-end items-center bg-white dark:bg-gray-900 dark:text-gray-100 shadow-md">
           <DarkModeToggle />
         </header>
         <main className="min-h-screen">

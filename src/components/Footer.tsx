@@ -30,14 +30,6 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a
-                href="#faq"
-                className="hover:text-blue-600 dark:hover:text-blue-400 transition"
-              >
-                FAQ
-              </a>
-            </li>
-            <li>
               <Link
                 to="/privacy"
                 className="hover:text-blue-600 dark:hover:text-blue-400 transition"

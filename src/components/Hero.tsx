@@ -302,18 +302,6 @@ export default function Hero() {
                 </div>
               </FloatingElement>
             </div>
-
-            <div className="absolute -top-4 -right-4 z-10">
-              <FloatingElement delay={1.4}>
-                <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400">
-                  <Download className="w-5 h-5" />
-                  <span className="text-sm font-bold">
-                    Téléchargement instant
-                  </span>
-                </div>
-              </FloatingElement>
-            </div>
-
             <div className="absolute -bottom-6 -right-6 z-10">
               <FloatingElement delay={1.6}>
                 <div className="flex items-center gap-2 text-purple-600 dark:text-purple-400">
@@ -350,15 +338,6 @@ export default function Hero() {
                 {/* Reflection Effect */}
                 <div className="absolute bottom-0 left-6 right-6 h-20 bg-gradient-to-t from-gray-200/20 to-transparent dark:from-gray-700/20 rounded-b-2xl" />
               </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1 }}
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 mt-6 flex items-center gap-2 text-gray-500 dark:text-gray-400"
-            >
-              <span className="text-sm">Faites défiler vers le bas</span>
-              <ArrowDown className="w-4 h-4 animate-bounce" />
             </motion.div>
           </motion.div>
         </div>
