@@ -1,0 +1,49 @@
+.
+├── components.json
+├── dist
+│   ├── assets
+│   │   ├── index-5ff572e0.css
+│   │   └── index-635ab913.js
+│   ├── ebook-image.png
+│   └── index.html
+├── index.html
+├── netlify.toml
+├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── public
+│   ├── assets
+│   │   └── ebook-image.webp
+│   ├── robots.txt
+│   └── sitemap.xml
+├── src
+│   ├── App.tsx
+│   ├── components
+│   │   ├── ContactForm.tsx
+│   │   ├── cookies
+│   │   ├── DarkModeToggle.tsx
+│   │   ├── FAQ.tsx
+│   │   ├── Features.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Hero.tsx
+│   │   ├── Testimonials.tsx
+│   │   └── ui
+│   ├── context
+│   │   └── DarkModeContext.tsx
+│   ├── features
+│   ├── index.css
+│   ├── lib
+│   │   └── utils.ts
+│   ├── main.tsx
+│   ├── pages
+│   │   ├── Privacy.tsx
+│   │   └── Terms.tsx
+│   ├── Routes.tsx
+│   └── styles
+│       └── style.css
+├── structure.txt
+├── tailwind.config.js
+├── tsconfig.json
+└── vite.config.ts
+
+14 directories, 33 files
