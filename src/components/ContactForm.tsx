@@ -42,7 +42,7 @@ export default function ContactForm() {
     reset,
     formState: { errors, isValid },
   } = useForm<FormData>({
-    mode: 'onChange', // Validation en temps réel
+    mode: 'onChange',
   });
 
   const [countryCode, setCountryCode] = useState<string>('FR');
@@ -122,16 +122,19 @@ export default function ContactForm() {
 
     try {
       // Validation côté client supplémentaire
-      const phoneNumber = parsePhoneNumberFromString(data.phone);
-      if (!phoneNumber || !phoneNumber.isValid()) {
-        throw new Error('Numéro de téléphone invalide');
+      let phoneNumber = null;
+      if (data.phone) {
+        phoneNumber = parsePhoneNumberFromString(data.phone);
+        if (!phoneNumber || !phoneNumber.isValid()) {
+          throw new Error('Numéro de téléphone invalide');
+        }
       }
 
       // Sanitisation des données
       const sanitizedData = {
         name: sanitizeInput(data.name),
         email: data.email.toLowerCase().trim(),
-        phone: phoneNumber.formatInternational(),
+        phone: phoneNumber ? phoneNumber.formatInternational() : '',
         message: sanitizeInput(data.message),
       };
 
@@ -180,14 +183,6 @@ export default function ContactForm() {
       toast.error(errorMessage, {
         role: 'alert',
         autoClose: 5000,
-        onClose: () => {
-          if (errorMessage.includes('trop long')) {
-            setError('message', {
-              type: 'manual',
-              message: errorMessage,
-            });
-          }
-        },
       });
     } finally {
       setIsSubmitting(false);
@@ -195,18 +190,19 @@ export default function ContactForm() {
   };
 
   const inputClasses = (fieldName: keyof FormData) => `
-    w-full pl-12 pr-4 py-3 
-    bg-white dark:bg-gray-600 
+    w-full pl-12 pr-4 py-3 text-base
+    bg-white dark:bg-gray-700 
     text-gray-900 dark:text-white
     border-2 rounded-lg 
     transition-all duration-200 ease-in-out
     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+    hover:border-gray-400 dark:hover:border-gray-500
     disabled:opacity-60 disabled:cursor-not-allowed
     placeholder:text-gray-500 dark:placeholder:text-gray-400
     ${
       errors[fieldName]
         ? 'border-red-500 bg-red-50 dark:bg-red-900/20'
-        : 'border-gray-300 dark:border-gray-500 hover:border-gray-400 dark:hover:border-gray-400'
+        : 'border-gray-300 dark:border-gray-600'
     }
   `;
 
@@ -347,7 +343,7 @@ export default function ContactForm() {
                   )}
                 </motion.div>
 
-                {/* Téléphone */}
+                {/* Téléphone - Version simplifiée */}
                 <motion.div
                   animate={errors.phone ? { x: [-10, 10, -10, 10, 0] } : {}}
                   transition={{ duration: 0.4 }}
@@ -358,41 +354,32 @@ export default function ContactForm() {
                   >
                     Numéro de téléphone
                   </label>
-
-                  <div className="flex items-center gap-2">
-                    {/* Drapeau (via PhoneInput country selector) */}
-                    <PhoneInput
-                      id="phone"
-                      defaultCountry={countryCode as any}
-                      international
-                      countryCallingCodeEditable={false}
-                      value={phoneValue}
-                      onChange={handlePhoneChange}
-                      disabled={isSubmitting}
-                      placeholder="Votre numéro de téléphone"
-                      aria-invalid={errors.phone ? 'true' : 'false'}
-                      aria-describedby={
-                        errors.phone ? 'phone-error' : undefined
-                      }
-                      className="relative w-full"
-                      inputComponent={(props) => (
-                        <div className="relative w-full">
-                          <Phone
-                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none z-10"
-                            size={20}
-                            aria-hidden="true"
-                          />
-                          <input
-                            {...props}
-                            className={`w-full pl-10 pr-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                              props.className ?? ''
-                            }`}
-                          />
-                        </div>
-                      )}
+                  <div className="relative">
+                    <Phone
+                      className="absolute left-4 ml-7 top-1/2 transform -translate-y-1/2 -translate-x-1/10 text-gray-400 dark:text-gray-500 z-10"
+                      size={20}
+                      aria-hidden="true"
                     />
+                    <div className="relative">
+                      <PhoneInput
+                        id="phone"
+                        defaultCountry={countryCode as any}
+                        international
+                        countryCallingCodeEditable={false}
+                        value={phoneValue}
+                        onChange={handlePhoneChange}
+                        disabled={isSubmitting}
+                        placeholder="Votre numéro de téléphone"
+                        className={`w-full ${
+                          errors.phone ? 'phone-error' : ''
+                        }`}
+                        aria-invalid={errors.phone ? 'true' : 'false'}
+                        aria-describedby={
+                          errors.phone ? 'phone-error' : undefined
+                        }
+                      />
+                    </div>
                   </div>
-
                   {errors.phone && (
                     <div className="flex items-center mt-2" role="alert">
                       <AlertCircle
@@ -472,7 +459,7 @@ export default function ContactForm() {
                 {/* Bouton d'envoi */}
                 <motion.button
                   type="submit"
-                  disabled={isSubmitting || (!isValid && submitAttempted)}
+                  disabled={isSubmitting}
                   whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                   whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                   transition={{ type: 'spring', stiffness: 300 }}
@@ -487,7 +474,6 @@ export default function ContactForm() {
                         : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg hover:shadow-xl'
                     }
                   `}
-                  aria-describedby="submit-status"
                 >
                   {isSubmitting ? (
                     <>
@@ -505,12 +491,6 @@ export default function ContactForm() {
                     </>
                   )}
                 </motion.button>
-
-                <p id="submit-status" className="sr-only" aria-live="polite">
-                  {isSubmitting
-                    ? "Formulaire en cours d'envoi"
-                    : 'Formulaire prêt à être envoyé'}
-                </p>
               </div>
             </form>
           </div>
@@ -537,62 +517,101 @@ export default function ContactForm() {
         aria-live="assertive"
       />
 
-      <style>
-        {`
-          .phone-input-custom .PhoneInputInput {
-            width: 100%;
-            padding-left: 3rem;
-            padding-right: 1rem;
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            background-color: #fff;
-            color: #111827;
-            border-width: 2px;
-            border-radius: 0.5rem;
-            transition: all 0.2s ease-in-out;
-            outline: none;
-            box-sizing: border-box;
-          }
-          .dark .phone-input-custom .PhoneInputInput {
-            background-color: #4b5563;
-            color: #fff;
-          }
-          .phone-input-custom .PhoneInputInput:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 2px #3b82f6;
-          }
-          .phone-input-custom .PhoneInputInput:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-          }
-          .phone-input-custom .PhoneInputInput::placeholder {
-            color: #6b7280;
-          }
-          .dark .phone-input-custom .PhoneInputInput::placeholder {
-            color: #9ca3af;
-          }
-          ${
-            errors.phone
-              ? `
-            .phone-input-custom .PhoneInputInput {
-              border-color: rgb(239, 68, 68);
-              background-color: rgb(254, 242, 242);
-            }
-            .dark .phone-input-custom .PhoneInputInput {
-              background-color: rgba(127, 29, 29, 0.2);
-            }
-          `
-              : `
-            .phone-input-custom .PhoneInputInput {
-              border-color: rgb(209, 213, 219);
-            }
-            .phone-input-custom .PhoneInputInput:hover {
-              border-color: rgb(156, 163, 175);
-            }
-          `
-          }
-        `}
-      </style>
+      {/* Styles globaux pour PhoneInput avec Tailwind uniquement */}
+      <style>{`
+        /* PhoneInput container */
+        .PhoneInput {
+          /* You can use Tailwind classes in your JSX, but not in <style> tags.
+             If you want to use these styles, convert @apply to standard CSS or move to a CSS file. */
+          position: relative;
+          width: 100%;
+        }
+
+        /* Input field styling */
+        .PhoneInput input {
+          width: 100%;
+          padding-left: 3rem;
+          padding-right: 1rem;
+          padding-top: 0.75rem;
+          padding-bottom: 0.75rem;
+          font-size: 1rem;
+          background-color: #fff;
+          color: #1a202c;
+          border-width: 2px;
+          border-color: #d1d5db;
+          border-radius: 0.5rem;
+          transition: all 0.2s;
+        }
+
+        .dark .PhoneInput input {
+          background-color: #374151;
+          color: #fff;
+          border-color: #4b5563;
+        }
+
+        .PhoneInput input:focus {
+          outline: none;
+          box-shadow: 0 0 0 2px #3b82f6;
+          border-color: transparent;
+        }
+
+        .PhoneInput input:hover {
+          border-color: #9ca3af;
+        }
+
+        .dark .PhoneInput input:hover {
+          border-color: #6b7280;
+        }
+
+        .PhoneInput input:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+
+        .PhoneInput input::placeholder {
+          color: #6b7280;
+        }
+
+        .dark .PhoneInput input::placeholder {
+          color: #9ca3af;
+        }
+
+        /* Error state */
+        .phone-error .PhoneInput input {
+          border-color: #ef4444;
+          background-color: #fef2f2;
+        }
+
+        .dark .phone-error .PhoneInput input {
+          background-color: rgba(185, 28, 28, 0.125);
+        }
+
+        /* Country selector */
+        .PhoneInput .PhoneInputCountrySelect {
+          position: absolute;
+          left: 0.75rem;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 20;
+          border: none;
+          background: transparent;
+          padding: 0;
+          margin: 0;
+          width: 1.5rem;
+          height: 1.25rem;
+        }
+
+        .PhoneInput .PhoneInputCountrySelectArrow {
+          display: none;
+        }
+
+        .PhoneInput .PhoneInputCountryIcon {
+          width: 1.25rem;
+          height: 1rem;
+          margin-right: 0.5rem;
+          background-size: cover;
+        }
+      `}</style>
     </section>
   );
 }
