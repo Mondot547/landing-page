@@ -222,18 +222,6 @@ export default function Features() {
                   key={i}
                   onMouseEnter={() => handleCardInteraction(i)}
                   onMouseLeave={handleCardLeave}
-                  initial={{
-                    position: 'absolute',
-                    top: offset.y === '-50%' ? '25%' : '75%',
-                    left: offset.x === '-50%' ? '25%' : '75%',
-                    width: '40%',
-                    height: '40%',
-                    scale: 0.8,
-                    x: '-50%',
-                    y: '-50%',
-                    zIndex: 1,
-                    opacity: 1,
-                  }}
                   animate={
                     isHovered
                       ? {
@@ -259,10 +247,10 @@ export default function Features() {
                           transition: { duration: 0.5, ease: 'easeOut' },
                         }
                       : {
-                          top: offset.y === '-50%' ? '25%' : '65%',
+                          top: offset.y === '-50%' ? '25%' : '60%',
                           left: offset.x === '-50%' ? '25%' : '65%',
                           width: '40%',
-                          height: '40%',
+                          height: '25%',
                           scale: 0.8,
                           x: '-38%',
                           y: '-50%',
